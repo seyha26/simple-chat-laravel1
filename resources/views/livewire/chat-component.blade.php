@@ -190,5 +190,16 @@
           @endif
       </main>
   </div>
- 
+
+<script>
+    document.getElementById('chatSelector').addEventListener('click', function () {
+                let box = document.querySelector("#chatBox");
+                box.scrollTop = 10;
+    })
+    setInterval(function(){
+        console.log("Testing")
+        let box = document.querySelector("#chatBox");
+        box.scrollTop = box.scrollHeight
+        }, 1000)
+</script>
   </div>

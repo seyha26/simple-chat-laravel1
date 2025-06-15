@@ -15,12 +15,9 @@ class ChatComponent extends Component
     public function render()
     {
         $this->users = User::where('id', '!=', Auth::id())->get();
-
-        // 💡 Refresh chat messages on every render (for polling)
         if ($this->chat) {
             $this->chat = Chat::with('message')->find($this->chat->id);
         }
-
         return view('livewire.chat-component');
     }
 
@@ -36,7 +33,7 @@ class ChatComponent extends Component
         if (!$this->chat) {
             $this->chat = Chat::create([
                 'sender_id' => Auth::id(),
-                'reciever_id' => $id, // ✅ fixed typo
+                'reciever_id' => $id,
             ]);
         }
     }
@@ -48,8 +45,6 @@ class ChatComponent extends Component
             'sender_id' => Auth::id(),
             'chat_id' => $this->chat->id
         ]);
-
-        // ✅ Reset input + refresh chat messages
         $this->message = '';
         $this->chat = Chat::with('message')->find($this->chat->id);
     }
